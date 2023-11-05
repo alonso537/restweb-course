@@ -30,9 +30,19 @@ export class TodosController {
         const {text} = req.body;
 
         if(!text) {
-            return res.status(404).json({error: `El texto es requerido`})
+            return res.status(400).json({error: `Text property is required`})
         }
 
-        const newTodo = todos.
+        const newTodo = {
+            id: todos.length + 1,
+            text,
+            createdAt: new Date()
+        }
+
+        todos.push(newTodo)
+
+        res.status(201).json(newTodo)
+
+
     }
 }

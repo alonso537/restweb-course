@@ -24,14 +24,14 @@ export class TodoDatasourceImpl implements TodoDataSource {
       where: { id: id },
     });
 
-    if (!todo) throw new Error(`Todo with id ${id} not found`);
+    if (!todo) throw `Todo with id ${id} not found`;
 
     return TodoEntity.fromObject(todo);
   }
   async updateById(updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
     const todo = await this.findById(updateTodoDto.id);
 
-    if (!todo) throw new Error(`Todo with id ${updateTodoDto.id} not found`);
+    if (!todo) throw `Todo with id ${updateTodoDto.id} not found`;
 
     const updatedTodo = await prisma.todo.update({
       where: { id: updateTodoDto.id },
@@ -43,7 +43,7 @@ export class TodoDatasourceImpl implements TodoDataSource {
   async deleteById(id: number): Promise<TodoEntity> {
     const todo = await this.findById(id);
 
-    if (!todo) throw new Error(`Todo with id ${id} not found`);
+    if (!todo) throw `Todo with id ${id} not found`;
 
     const deletedTodo = await prisma.todo.delete({
       where: { id: id },
